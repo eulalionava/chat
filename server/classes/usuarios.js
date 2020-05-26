@@ -3,8 +3,8 @@ class Usuarios{
         this.personas = [];
     }
     //FUNCION QUE AGREGA PERSONAS
-    agregarPersona(id,nombre){
-        let persona = {id,nombre};
+    agregarPersona(id,nombre,sala){
+        let persona = {id,nombre,sala};
 
         this.personas.push(persona);
         return this.personas;
@@ -24,7 +24,8 @@ class Usuarios{
 
     //OBTIENE LAS PERSONAS POR SALA DE CHAT
     getPersonasPorSala(sala){
-        
+        let personasEnSala = this.personas.filter(persona =>persona.sala === sala);
+        return personasEnSala;
     }
 
     //ELIMINA UNA PERSONA ,QUE SALE DEL CHAT

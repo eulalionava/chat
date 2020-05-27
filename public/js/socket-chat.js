@@ -20,7 +20,7 @@ socket.on('connect', function() {
     //ver quien se conecta al chat
     socket.emit('entrarChat', usuario, function(resp) {
         console.log('Usuarios conectados', resp);
-        console.log(renderizarUsuarios(resp));
+        renderizarUsuarios(resp);
     });
 
 });
@@ -44,12 +44,15 @@ socket.on('disconnect', function() {
 // Escuchar información
 socket.on('crearMensaje', function(mensaje) {
     console.log('Servidor:', mensaje);
+    renderizarMensajes(mensaje,false);
+    scrollBottom();
 });
 
 // Escuchar cambios de usuarios
 // cuando un usuario entra o sale del chat
 socket.on('listaPersona', function(personas) {
-    console.log(personas);
+    console.log("Persona conectada:",personas);
+    renderizarUsuarios(personas);
     
 });
 

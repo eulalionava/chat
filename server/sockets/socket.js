@@ -31,12 +31,15 @@ io.on('connection', (client) => {
     });
 
     //FUNCION QUE CREA EL MENSAJE
-    client.on('crearMensaje',(data)=>{
+    client.on('crearMensaje',(data,callback)=>{
         let persona = usuarios.getPersona(client.id);
         //crear mensaje
         let mensaje = crearMensaje(persona.nombre,data.mensaje);
         //emitir mensaje
         client.broadcast.to(persona.sala).emit('crearMensaje',mensaje);
+
+        //regresa el mensaje
+        callback(mensaje);
     })
 
     //DESCONEXION DEL CHAT

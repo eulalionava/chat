@@ -4,9 +4,11 @@ var params = new URLSearchParams(window.location.search);
 // referencias
 var divUsuarios = $('#divUsuarios');
 var formEnviar = $("#formEnviar");
+var formEnviarPrivado = $("#formEnviarPrivado");
 var txtMensaje = $("#txtMensaje");
 var divChatbox = $("#divChatBoxSala");
 
+var idPersona = "";
 var nombre = params.get('nombre');
 var sala = params.get('sala');
 
@@ -99,6 +101,10 @@ divUsuarios.on('click','a',function(){
         console.log(id);
         $("#chatPrivado").css('display','block')
         $("#chatSala").css('display','none');
+        formEnviar.css('display','none');
+        formEnviarPrivado.css('display','block');
+
+        idPersona = id;
     }
 });
 
@@ -121,5 +127,18 @@ formEnviar.on('submit',function(e){
         renderizarMensajes(mensaje,true);
         scrollBottom();
     });
+
+})
+
+///EVENTOS PARA MANDA MENSAJES PRIVADOS
+formEnviarPrivado.on('submit',function(e){
+    e.preventDefault();
+    
+    console.log(idPersona);
+    let msj = $("#txtMensajePrivado").val();
+
+    socket.emit('mensajePrivado',{mensaje:msj,para:idPersona},function(mensaje){
+        console.log(mensaje);
+    })
 
 })

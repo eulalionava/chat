@@ -3,8 +3,8 @@ class Usuarios{
         this.personas = [];
     }
     //FUNCION QUE AGREGA PERSONAS
-    agregarPersona(id,nombre,sala){
-        let persona = {id,nombre,sala};
+    agregarPersona(id,nombre,sala,contMsj=0){
+        let persona = {id,nombre,sala,contMsj};
 
         this.personas.push(persona);
         return this.personas;

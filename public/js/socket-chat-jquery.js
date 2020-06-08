@@ -7,6 +7,8 @@ var formEnviar = $("#formEnviar");
 var formEnviarPrivado = $("#formEnviarPrivado");
 var txtMensaje = $("#txtMensaje");
 var divChatbox = $("#divChatBoxSala");
+var divChatPrivado = $("#divChatBoxPrivado");
+var nombrePrivado = $("#nombrePrivado");
 
 var idPersona = "";
 var nombre = params.get('nombre');
@@ -75,6 +77,24 @@ function renderizarMensajes(mensaje,yo){
 
     divChatbox.append(html);
 }
+
+//RENDERIZAR LOS MENSAJES PRIVADOS
+function renderizarMensajesPrivados(mensaje,yo){
+    var html = '';
+
+        html += '<li class="reverse">';
+        html += '    <div class="chat-content">';
+        html += '        <h5>'+mensaje.usuario+'</h5>';
+        html += '        <div class="box bg-light-inverse">'+mensaje.mensaje+'</div>';
+        html += '    </div>';
+        html += '    <div class="chat-img"><img src="assets/images/users/user_chat.png" alt="user" /></div>';
+        html += '    <div class="chat-time"></div>';
+        html += '</li>';
+    
+
+        divChatPrivado.append(html);
+}
+
 //Juega con el scroll con forme se va escribiendo y mandando los mensajes
 function scrollBottom() {
 
@@ -105,6 +125,13 @@ divUsuarios.on('click','a',function(){
         formEnviarPrivado.css('display','block');
 
         idPersona = id;
+
+        //Emite para obtener la persona que se le enviara el mensaje
+        socket.emit('getPersonaPrivada',{id:idPersona},function(data){
+            console.log(data);
+            nombrePrivado.html("<p> Charlando con: "+data.nombre+"</p>");
+
+        });
     }
 });
 
@@ -134,11 +161,13 @@ formEnviar.on('submit',function(e){
 formEnviarPrivado.on('submit',function(e){
     e.preventDefault();
     
-    console.log(idPersona);
     let msj = $("#txtMensajePrivado").val();
+    
+    $("#txtMensajePrivado").val('');
 
     socket.emit('mensajePrivado',{mensaje:msj,para:idPersona},function(mensaje){
-        console.log(mensaje);
+        console.log("Emisor:",mensaje);
+        renderizarMensajesPrivados(mensaje,true);
     })
 
 })

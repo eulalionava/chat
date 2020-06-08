@@ -7,7 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Chat</title>
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 
     <!-- Page CSS -->
     <link href="css/pages/chat-app-page.css" rel="stylesheet">
@@ -74,6 +74,9 @@
                                             </ul>
                                         </div>
                                         <div id="chatPrivado" style="display: none;">
+                                            <div style="height: 44px;border: 1px solid #f0f0f3;padding: 10px;" id="nombrePrivado">
+                                                
+                                            </div>
                                             <ul class="chat-list p-20" id="divChatBoxPrivado">
                                                 <li>Privado</li>
                                             </ul>
@@ -96,7 +99,7 @@
                                         <form id="formEnviarPrivado" style="display: none;">
                                             <div class="row">
                                                 <div class="col-8">
-                                                    <input autocomplete="off" id="txtMensajePrivado" placeholder="mensaje privado" class="form-control b-0" autofocus />
+                                                    <input autocomplete="off" id="txtMensajePrivado" placeholder="Escribe un mensaje" class="form-control b-0" autofocus />
                                                 </div>
                                                 <div class="col-4 text-right">
                                                     <button type="submit" class="btn btn-info btn-circle btn-lg"><i class="fa fa-paper-plane-o"></i> </button>
@@ -141,7 +144,7 @@
 
 
 
-
+    <script src="js/bootstrap.min.js"></script>
     <script src="js/libs/jquery.min.js"></script>
     <script src="socket.io/socket.io.js"></script>
 

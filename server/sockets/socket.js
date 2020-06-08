@@ -4,6 +4,7 @@ const { crearMensaje } = require('../utilidades/utilidades');
 const { Usuarios }  = require('../classes/usuarios');
 
 const usuarios = new Usuarios();
+let cantidadDeMensajes = 0;
 
 io.on('connection', (client) => {
 
@@ -52,11 +53,23 @@ io.on('connection', (client) => {
         client.broadcast.to(personaBorrada.sala).emit('listaPersona',usuarios.getPersonasPorSala(personaBorrada.sala));
     })
 
+    client.on('getPersonaPrivada',(data,callback)=>{
+        let persona = usuarios.getPersona(data.id);
+        console.log(persona);
+        callback(persona)
+    })
+
     //MENSAJES PRIVADOS
-    client.on('mensajePrivado',data=>{
+    client.on('mensajePrivado',(data,callback)=>{
+        //Persona particular
         let persona = usuarios.getPersona(client.id);
+        persona.contMsj = persona.contMsj + 1;
+        console.log("Ver usuario:",persona);
         //Emite el mensaje a una persona especifica
-        client.broadcast.to(data.para).emit('mensajePrivado',crearMensaje(persona.nombre,data.mensaje));
+        // let emitirMensaje = crearMensaje(persona.nombre,data.mensaje);
+        // console.log(emitirMensaje);
+        // client.broadcast.to(data.para).emit('mensajePrivado',emitirMensaje );
+        // callback(emitirMensaje);
     })
 
 });

@@ -60,5 +60,6 @@ socket.on('listaPersona', function(personas) {
 socket.on('mensajePrivado', function(mensaje) {
 
     console.log('Mensaje Privado:', mensaje);
+    renderizarMensajesPrivados(mensaje,false);
 
 });

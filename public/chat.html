@@ -8,6 +8,8 @@
     <title>Chat</title>
 
     <link rel="stylesheet" href="css/bootstrap.min.css">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/libs/jquery.min.js"></script>
 
     <!-- Page CSS -->
     <link href="css/pages/chat-app-page.css" rel="stylesheet">
@@ -63,6 +65,67 @@
                                 <div class="chat-right-aside">
                                     <div class="chat-main-header">
                                         <div class="p-20 b-b">
+                                            <ul>
+                                                <li style="display: block;">
+                                                    <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                                                        <div class="carousel-inner">
+                                                          <div class="carousel-item active">
+                                                            <table>
+                                                              <tr>
+                                                                <td>
+                                                                  <img class="d-block w-30" src="assets/images/users/d1.jpg" height="50"  alt="First slide">
+                                                                </td>
+                                                                <td>
+                                                                  <img class="d-block w-30" src="assets/images/users/d1.jpg" height="50"  alt="First slide">
+                                                                </td>
+                                                                <td>
+                                                                  <img class="d-block w-30" src="assets/images/users/d1.jpg" height="50"  alt="First slide">
+                                                                </td>
+                                                              </tr>
+                                                            </table>
+                                                          </div>
+                                                          <div class="carousel-item">
+                                                              <table>
+                                                                <tr>
+                                                                  <td>
+                                                                    <img class="d-block w-30" src="assets/images/users/d2.jpg" height="50" alt="Second slide">
+                                                                  </td>
+                                                                  <td>
+                                                                    <img class="d-block w-30" src="assets/images/users/d2.jpg" height="50" alt="Second slide">
+                                                                  </td>
+                                                                  <td>
+                                                                    <img class="d-block w-30" src="assets/images/users/d2.jpg" height="50" alt="Second slide">
+                                                                  </td>
+                                                                </tr>
+                                                              </table>
+                                                          </div>
+                                                          <div class="carousel-item">
+                                                            <table>
+                                                              <tr>
+                                                                <td>
+                                                                  <img class="d-block w-30" src="assets/images/users/d3.jpg" height="50" alt="Third slide">
+                                                                </td>
+                                                                <td>
+                                                                  <img class="d-block w-30" src="assets/images/users/d3.jpg" height="50" alt="Third slide">
+                                                                </td>
+                                                                <td>
+                                                                  <img class="d-block w-30" src="assets/images/users/d3.jpg" height="50" alt="Third slide">
+                                                                </td>
+                                                              </tr>
+                                                            </table>
+                                                          </div>
+                                                        </div>
+                                                        <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                                                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                          <span class="sr-only">Previous</span>
+                                                        </a>
+                                                        <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                                                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                          <span class="sr-only">Next</span>
+                                                        </a>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                             <h3 class="box-title">Acepto criticas constructivas: eulalio_cruz_nava@hotmail.com <small></small></h3>
                                         </div>
                                     </div>
@@ -78,7 +141,7 @@
                                                 
                                             </div>
                                             <ul class="chat-list p-20" id="divChatBoxPrivado">
-                                                <li>Privado</li>
+
                                             </ul>
                                         </div>
 
@@ -144,8 +207,7 @@
 
 
 
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/libs/jquery.min.js"></script>
+    
     <script src="socket.io/socket.io.js"></script>
 
     <script src="js/socket-chat-jquery.js"></script>

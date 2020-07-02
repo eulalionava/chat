@@ -5752,7 +5752,7 @@ File: scss
 /*-- ============================================================== 
  Phone and below ipad(767px) 
  ============================================================== */
-@media (max-width: 767px) {
+@media (max-width: 576px) {
   .container-fluid {
     padding: 25px 15px 25px 15px; }
   /*Header*/

@@ -55,7 +55,7 @@ io.on('connection', (client) => {
 
     client.on('getPersonaPrivada',(data,callback)=>{
         let persona = usuarios.getPersona(data.id);
-        console.log(persona);
+        persona.contMsj = 0;
         callback(persona)
     })
 
@@ -63,13 +63,24 @@ io.on('connection', (client) => {
     client.on('mensajePrivado',(data,callback)=>{
         //Persona particular
         let persona = usuarios.getPersona(client.id);
+
         persona.contMsj = persona.contMsj + 1;
-        console.log("Ver usuario:",persona);
         //Emite el mensaje a una persona especifica
-        // let emitirMensaje = crearMensaje(persona.nombre,data.mensaje);
-        // console.log(emitirMensaje);
-        // client.broadcast.to(data.para).emit('mensajePrivado',emitirMensaje );
-        // callback(emitirMensaje);
-    })
+        let emitirMensaje = crearMensaje(persona.nombre,data.mensaje);
+
+        client.broadcast.to(data.para).emit('mensajePrivado',emitirMensaje );
+
+        //Renderiza nuevamente los usuarios y mostrar si hay un mensaje nuevo
+        client.broadcast.to(persona.sala).emit('listaPersona',usuarios.getPersonasPorSala(persona.sala));
+        callback(emitirMensaje);
+    });
+
+    //ACTUALIZA NUEVAMENTE LOS USUARIOS Y VACIANDO LOS MENSAJES NUEVOS
+    client.on('actualizarUsuarios',()=>{
+
+        let persona = usuarios.getPersona(client.id);
+        persona.contMsj = 0;
+        client.broadcast.to(persona.sala).emit('listaPersona',usuarios.getPersonasPorSala(persona.sala));
+    });
 
 });

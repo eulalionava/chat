@@ -14,6 +14,10 @@ var idPersona = "";
 var nombre = params.get('nombre');
 var sala = params.get('sala');
 
+$(".open-panel").click(function(){
+    $(".chat-left-inner").css('left','250px')
+});
+
 // / Funciones para renderizar usuarios
 function renderizarUsuarios(personas) { // [{},{},{}]
 
@@ -27,8 +31,16 @@ function renderizarUsuarios(personas) { // [{},{},{}]
 
     for (var i = 0; i < personas.length; i++) {
 
+        if(personas[i].contMsj > 0){
+            cantidad = "<span class='badge badge-success'>"+personas[i].contMsj+"</span>";
+        }else{
+            cantidad = "";
+        }
+        
         html += '<li>';
-        html += '    <a data-id="' + personas[i].id + '"  href="javascript:void(0)"><img src="assets/images/users/user_chat.png" alt="user-img" class="img-circle"> <span>' + personas[i].nombre + ' <small class="text-success">online</small></span></a>';
+        html += '    <a data-id="' + personas[i].id + '"  href="javascript:void(0)"> ';
+        html += '       <img src="assets/images/users/user_chat.png" alt="user-img" class="img-circle"> <span>' + personas[i].nombre + ''+cantidad+'<small class="text-success">online</small></span>';
+        html += '    </a>';
         html += '</li>';
     }
 
@@ -119,6 +131,7 @@ divUsuarios.on('click','a',function(){
 
     if(id){
         console.log(id);
+        //Muestra y oculta
         $("#chatPrivado").css('display','block')
         $("#chatSala").css('display','none');
         formEnviar.css('display','none');
@@ -128,10 +141,11 @@ divUsuarios.on('click','a',function(){
 
         //Emite para obtener la persona que se le enviara el mensaje
         socket.emit('getPersonaPrivada',{id:idPersona},function(data){
-            console.log(data);
             nombrePrivado.html("<p> Charlando con: "+data.nombre+"</p>");
-
         });
+
+        //Vaciamos los mensajes
+        socket.emit('actualizarUsuarios',{});
     }
 });
 
@@ -166,7 +180,6 @@ formEnviarPrivado.on('submit',function(e){
     $("#txtMensajePrivado").val('');
 
     socket.emit('mensajePrivado',{mensaje:msj,para:idPersona},function(mensaje){
-        console.log("Emisor:",mensaje);
         renderizarMensajesPrivados(mensaje,true);
     })
 
